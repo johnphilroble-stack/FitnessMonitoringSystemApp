@@ -6,32 +6,32 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
 
-public class FitnessApp extends JFrame {
+public class FitnessMonitoringSystemApp extends JFrame {
 
     private final CardLayout cardLayout;
     private final JPanel mainContainer;
     private final FitnessManager manager;
 
-
+    
     private JTextField nameField, ageField, weightField, heightField;
 
-
+    
     private JTextField calcWeightField, calcHeightField, calcBpmField, calcStepsField;
     private JLabel liveBmiLabel, liveHrLabel, liveCalLabel;
 
-
+    
     private JLabel hrValLabel, bmiStripeLabel, calStripeLabel;
     private JLabel summaryAct, summaryCal, summarySteps;
 
-
+    
     private JPanel screen3RecsPanel, screen4RecsPanel;
 
-    public FitnessApp() {
+    public FitnessMonitoringSystemApp() {
         manager = new FitnessManager();
 
         setTitle("Fitness Monitor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(375, 667);
+        setSize(375, 667); 
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -47,12 +47,11 @@ public class FitnessApp extends JFrame {
         cardLayout.show(mainContainer, "Screen1");
     }
 
-
     private JPanel createScreen1Register() {
         JPanel panel = createMobilePanelBase();
         panel.add(createHeaderBar(false), BorderLayout.NORTH);
 
-        JPanel content = new JPanel(new BorderLayout(0, 15));
+        JPanel content = new JPanel(new BorderLayout(0, 12));
         content.setBackground(new Color(245, 246, 251));
 
         JLabel title = new JLabel("Fitness Monitor", JLabel.CENTER);
@@ -61,8 +60,8 @@ public class FitnessApp extends JFrame {
         content.add(title, BorderLayout.NORTH);
 
         RoundedPanel whiteCard = new RoundedPanel(24, Color.WHITE);
-        whiteCard.setLayout(new GridLayout(4, 1, 0, 16));
-        whiteCard.setBorder(new EmptyBorder(22, 18, 22, 18));
+        whiteCard.setLayout(new GridLayout(4, 1, 0, 14));
+        whiteCard.setBorder(new EmptyBorder(16, 18, 16, 18));
 
         nameField = createStyledTextField("Enter your Name");
         ageField = createStyledTextField("Enter your Age");
@@ -96,25 +95,25 @@ public class FitnessApp extends JFrame {
         return panel;
     }
 
-
+    
     private JPanel createScreen2Activity() {
         JPanel panel = createMobilePanelBase();
         panel.add(createHeaderBar(true), BorderLayout.NORTH);
 
-        JPanel content = new JPanel(new BorderLayout(0, 10));
+        JPanel content = new JPanel(new BorderLayout(0, 8));
         content.setBackground(new Color(245, 246, 251));
 
-        JPanel topHeaderWrapper = new JPanel(new BorderLayout(0, 8));
+        JPanel topHeaderWrapper = new JPanel(new BorderLayout(0, 6));
         topHeaderWrapper.setBackground(new Color(245, 246, 251));
 
         JLabel title = new JLabel("Select Activity", JLabel.CENTER);
-        title.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        title.setFont(new Font("Segoe UI", Font.BOLD, 22));
         title.setForeground(new Color(42, 61, 102));
         topHeaderWrapper.add(title, BorderLayout.NORTH);
 
         RoundedPanel multiInputCard = new RoundedPanel(18, Color.WHITE);
         multiInputCard.setLayout(new GridLayout(1, 4, 6, 0));
-        multiInputCard.setBorder(new EmptyBorder(10, 10, 10, 10));
+        multiInputCard.setBorder(new EmptyBorder(8, 8, 8, 8));
 
         calcWeightField = new JTextField();
         calcWeightField.setHorizontalAlignment(JTextField.CENTER);
@@ -140,8 +139,8 @@ public class FitnessApp extends JFrame {
         content.add(topHeaderWrapper, BorderLayout.NORTH);
 
         RoundedPanel listCard = new RoundedPanel(24, Color.WHITE);
-        listCard.setLayout(new GridLayout(4, 1, 0, 10));
-        listCard.setBorder(new EmptyBorder(12, 14, 12, 14));
+        listCard.setLayout(new GridLayout(4, 1, 0, 8));
+        listCard.setBorder(new EmptyBorder(10, 14, 10, 14));
 
         listCard.add(createActivityRow("Resting", new Color(220, 242, 237), "C:/Users/Phil/Downloads/resting.png"));
         listCard.add(createActivityRow("Walking", new Color(220, 242, 237), "C:/Users/Phil/Downloads/walking.png"));
@@ -151,33 +150,33 @@ public class FitnessApp extends JFrame {
 
         RoundedPanel liveDisplayCard = new RoundedPanel(20, Color.WHITE);
         liveDisplayCard.setLayout(new BoxLayout(liveDisplayCard, BoxLayout.Y_AXIS));
-        liveDisplayCard.setBorder(new EmptyBorder(12, 16, 12, 16));
+        liveDisplayCard.setBorder(new EmptyBorder(10, 16, 10, 16));
 
         JLabel heading = new JLabel("Live Calculator Metrics");
-        heading.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        heading.setFont(new Font("Segoe UI", Font.BOLD, 13));
         heading.setForeground(new Color(42, 61, 102));
         liveDisplayCard.add(heading);
-        liveDisplayCard.add(Box.createVerticalStrut(8));
+        liveDisplayCard.add(Box.createVerticalStrut(6));
 
         liveHrLabel = new JLabel("Heart Rate: -- BPM");
-        liveHrLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        liveHrLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
         liveHrLabel.setForeground(new Color(231, 76, 60));
 
         liveBmiLabel = new JLabel("BMI Metric: --");
-        liveBmiLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        liveBmiLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
         liveBmiLabel.setForeground(new Color(29, 143, 131));
 
         liveCalLabel = new JLabel("Calorie Burn: -- kcal");
-        liveCalLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        liveCalLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
         liveCalLabel.setForeground(new Color(146, 92, 52));
 
         liveDisplayCard.add(createLiveRowWrapper(liveHrLabel, "C:/Users/Phil/Downloads/heartrate.png"));
-        liveDisplayCard.add(Box.createVerticalStrut(6));
+        liveDisplayCard.add(Box.createVerticalStrut(4));
         liveDisplayCard.add(createLiveRowWrapper(liveBmiLabel, "C:/Users/Phil/Downloads/bmi.png"));
-        liveDisplayCard.add(Box.createVerticalStrut(6));
+        liveDisplayCard.add(Box.createVerticalStrut(4));
         liveDisplayCard.add(createLiveRowWrapper(liveCalLabel, "C:/Users/Phil/Downloads/calories.png"));
 
-        JPanel bottomDeck = new JPanel(new BorderLayout(0, 8));
+        JPanel bottomDeck = new JPanel(new BorderLayout(0, 6));
         bottomDeck.setBackground(new Color(245, 246, 251));
         bottomDeck.add(liveDisplayCard, BorderLayout.NORTH);
 
@@ -195,76 +194,78 @@ public class FitnessApp extends JFrame {
         return panel;
     }
 
-
+   
     private JPanel createScreen3Results() {
         JPanel panel = createMobilePanelBase();
         panel.add(createHeaderBar(true), BorderLayout.NORTH);
 
-        JPanel content = new JPanel(new BorderLayout(0, 15));
+        JPanel content = new JPanel(new BorderLayout(0, 8));
         content.setBackground(new Color(245, 246, 251));
 
         JLabel title = new JLabel("Fitness Results", JLabel.CENTER);
-        title.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        title.setFont(new Font("Segoe UI", Font.BOLD, 22));
         title.setForeground(new Color(42, 61, 102));
         content.add(title, BorderLayout.NORTH);
 
         RoundedPanel metricsCard = new RoundedPanel(24, Color.WHITE);
         metricsCard.setLayout(new BoxLayout(metricsCard, BoxLayout.Y_AXIS));
-        metricsCard.setBorder(new EmptyBorder(20, 16, 20, 16));
+        
+        metricsCard.setBorder(new EmptyBorder(10, 16, 10, 16));
 
         JLabel heartLabel = new JLabel();
-        heartLabel.setPreferredSize(new Dimension(65, 65));
+       
+        heartLabel.setPreferredSize(new Dimension(45, 45));
         heartLabel.setHorizontalAlignment(JLabel.CENTER);
         heartLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         try {
             ImageIcon heartIcon = new ImageIcon("C:/Users/Phil/Downloads/heartrate.png");
             if (heartIcon.getIconWidth() > 0) {
-                heartLabel.setIcon(new ImageIcon(heartIcon.getImage().getScaledInstance(65, 65, Image.SCALE_SMOOTH)));
+                heartLabel.setIcon(new ImageIcon(heartIcon.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH)));
             }
         } catch (Exception e) { heartLabel.setText("❤️"); }
         metricsCard.add(heartLabel);
-        metricsCard.add(Box.createVerticalStrut(4));
+        metricsCard.add(Box.createVerticalStrut(2));
 
         JLabel hrTitle = new JLabel("Heart Rate");
-        hrTitle.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        hrTitle.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         hrTitle.setForeground(Color.GRAY);
         hrTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         metricsCard.add(hrTitle);
 
         hrValLabel = new JLabel("--- BPM", JLabel.CENTER);
-        hrValLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        hrValLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
         hrValLabel.setForeground(new Color(231, 76, 60));
         hrValLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         metricsCard.add(hrValLabel);
-        metricsCard.add(Box.createVerticalStrut(15));
+        metricsCard.add(Box.createVerticalStrut(8));
 
         bmiStripeLabel = new JLabel("BMI: --");
-        bmiStripeLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        bmiStripeLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
         bmiStripeLabel.setForeground(new Color(29, 143, 131));
         JPanel bmiStripe = createStripeWrapper(bmiStripeLabel, new Color(213, 243, 233), "C:/Users/Phil/Downloads/bmi.png");
 
         calStripeLabel = new JLabel("Calories: --");
-        calStripeLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        calStripeLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
         calStripeLabel.setForeground(new Color(146, 92, 52));
         JPanel calStripe = createStripeWrapper(calStripeLabel, new Color(252, 234, 210), "C:/Users/Phil/Downloads/calories.png");
 
         metricsCard.add(bmiStripe);
-        metricsCard.add(Box.createVerticalStrut(10));
+        metricsCard.add(Box.createVerticalStrut(6));
         metricsCard.add(calStripe);
         content.add(metricsCard, BorderLayout.CENTER);
 
         RoundedPanel bottomContainer = new RoundedPanel(0, new Color(245, 246, 251));
-        bottomContainer.setLayout(new BorderLayout(0, 12));
+        bottomContainer.setLayout(new BorderLayout(0, 8));
 
         RoundedPanel recBlock = new RoundedPanel(20, Color.WHITE);
         recBlock.setLayout(new BoxLayout(recBlock, BoxLayout.Y_AXIS));
-        recBlock.setBorder(new EmptyBorder(14, 14, 14, 14));
+        recBlock.setBorder(new EmptyBorder(10, 14, 10, 14));
 
         JLabel recTitle = new JLabel("Recommendations");
-        recTitle.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        recTitle.setFont(new Font("Segoe UI", Font.BOLD, 14));
         recTitle.setForeground(new Color(42, 61, 102));
         recBlock.add(recTitle);
-        recBlock.add(Box.createVerticalStrut(8));
+        recBlock.add(Box.createVerticalStrut(4));
 
         screen3RecsPanel = new JPanel();
         screen3RecsPanel.setLayout(new BoxLayout(screen3RecsPanel, BoxLayout.Y_AXIS));
@@ -287,12 +288,12 @@ public class FitnessApp extends JFrame {
         return panel;
     }
 
-
+    
     private JPanel createScreen4Final() {
         JPanel panel = createMobilePanelBase();
         panel.add(createHeaderBar(true), BorderLayout.NORTH);
 
-        JPanel content = new JPanel(new BorderLayout(0, 15));
+        JPanel content = new JPanel(new BorderLayout(0, 10));
         content.setBackground(new Color(245, 246, 251));
 
         JPanel topHeaderArea = new JPanel();
@@ -300,28 +301,28 @@ public class FitnessApp extends JFrame {
         topHeaderArea.setBackground(new Color(245, 246, 251));
 
         JLabel trophyLabel = new JLabel();
-        trophyLabel.setPreferredSize(new Dimension(65, 65));
+        trophyLabel.setPreferredSize(new Dimension(45, 45));
         trophyLabel.setHorizontalAlignment(JLabel.CENTER);
         trophyLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         try {
             ImageIcon trophyIcon = new ImageIcon("C:/Users/Phil/Downloads/trophy.png");
             if (trophyIcon.getIconWidth() > 0) {
-                trophyLabel.setIcon(new ImageIcon(trophyIcon.getImage().getScaledInstance(65, 65, Image.SCALE_SMOOTH)));
+                trophyLabel.setIcon(new ImageIcon(trophyIcon.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH)));
             }
         } catch (Exception e) { trophyLabel.setText("🏆"); }
         topHeaderArea.add(trophyLabel);
 
         JLabel jobDone = new JLabel("Good job today!", JLabel.CENTER);
-        jobDone.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        jobDone.setFont(new Font("Segoe UI", Font.BOLD, 20));
         jobDone.setForeground(new Color(42, 61, 102));
         jobDone.setAlignmentX(Component.CENTER_ALIGNMENT);
-        topHeaderArea.add(Box.createVerticalStrut(4));
+        topHeaderArea.add(Box.createVerticalStrut(2));
         topHeaderArea.add(jobDone);
         content.add(topHeaderArea, BorderLayout.NORTH);
 
         RoundedPanel gridCard = new RoundedPanel(24, Color.WHITE);
-        gridCard.setLayout(new GridLayout(1, 3, 10, 0));
-        gridCard.setBorder(new EmptyBorder(14, 10, 14, 10));
+        gridCard.setLayout(new GridLayout(1, 3, 8, 0));
+        gridCard.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         summaryAct = new JLabel("0 mins", JLabel.CENTER);
         summaryCal = new JLabel("0 kcal", JLabel.CENTER);
@@ -339,25 +340,25 @@ public class FitnessApp extends JFrame {
         RoundedPanel recBorderFrame = new RoundedPanel(24, Color.WHITE);
         recBorderFrame.setCustomBorder(new Color(93, 173, 226), 2);
         recBorderFrame.setLayout(new BoxLayout(recBorderFrame, BoxLayout.Y_AXIS));
-        recBorderFrame.setBorder(new EmptyBorder(16, 16, 16, 16));
+        recBorderFrame.setBorder(new EmptyBorder(10, 14, 10, 14));
 
         JLabel recTitle = new JLabel("Recommendations");
-        recTitle.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        recTitle.setFont(new Font("Segoe UI", Font.BOLD, 14));
         recTitle.setForeground(new Color(42, 61, 102));
         recBorderFrame.add(recTitle);
-        recBorderFrame.add(Box.createVerticalStrut(10));
+        recBorderFrame.add(Box.createVerticalStrut(4));
 
         screen4RecsPanel = new JPanel();
         screen4RecsPanel.setLayout(new BoxLayout(screen4RecsPanel, BoxLayout.Y_AXIS));
         screen4RecsPanel.setOpaque(false);
         recBorderFrame.add(screen4RecsPanel);
         bottomArea.add(recBorderFrame);
-        bottomArea.add(Box.createVerticalStrut(12));
+        bottomArea.add(Box.createVerticalStrut(8));
 
         RoundedPanel pushBanner = new RoundedPanel(14, new Color(220, 242, 237));
-        pushBanner.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 10));
+        pushBanner.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 6));
         JLabel pushLbl = new JLabel("🔥  Keep pushing! You're doing great!");
-        pushLbl.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        pushLbl.setFont(new Font("Segoe UI", Font.BOLD, 12));
         pushLbl.setForeground(new Color(28, 140, 120));
         pushBanner.add(pushLbl);
         bottomArea.add(pushBanner);
@@ -367,6 +368,7 @@ public class FitnessApp extends JFrame {
         return panel;
     }
 
+    
     private void executeLiveScreen2Calculation(String activityName) {
         manager.calculateFitness(calcWeightField.getText(), calcHeightField.getText(), calcBpmField.getText(), calcStepsField.getText(), activityName);
         UserMetrics data = manager.getMetrics();
@@ -395,16 +397,17 @@ public class FitnessApp extends JFrame {
             JPanel formattedRow = createRowWrapperWithBullet(lbl);
             lbl.setText("<html>" + tip + "</html>");
             targetPanel.add(formattedRow);
-            targetPanel.add(Box.createVerticalStrut(6));
+            targetPanel.add(Box.createVerticalStrut(4));
         }
         targetPanel.revalidate();
         targetPanel.repaint();
     }
 
+    
     private JPanel createRowWrapperWithBullet(JLabel textLabel) {
-        JPanel row = new JPanel(new BorderLayout(12, 0));
+        JPanel row = new JPanel(new BorderLayout(10, 0));
         row.setBackground(Color.WHITE);
-        row.setMaximumSize(new Dimension(Short.MAX_VALUE, 38));
+      
 
         JPanel bullet = new JPanel() {
             @Override
@@ -412,16 +415,16 @@ public class FitnessApp extends JFrame {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2.setColor(new Color(213, 243, 233));
-                g2.fill(new Ellipse2D.Double(0, 2, 14, 14));
+                g2.fill(new Ellipse2D.Double(0, 2, 10, 10));
                 g2.setColor(new Color(29, 143, 131));
-                g2.fill(new Ellipse2D.Double(4, 6, 6, 6));
+                g2.fill(new Ellipse2D.Double(3, 5, 4, 4));
                 g2.dispose();
             }
         };
         bullet.setOpaque(false);
-        bullet.setPreferredSize(new Dimension(14, 20));
+        bullet.setPreferredSize(new Dimension(12, 12));
 
-        textLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        textLabel.setFont(new Font("Segoe UI", Font.PLAIN, 11));
         textLabel.setForeground(new Color(92, 98, 135));
 
         row.add(bullet, BorderLayout.WEST);
@@ -430,20 +433,20 @@ public class FitnessApp extends JFrame {
     }
 
     private JPanel createMobilePanelBase() {
-        JPanel panel = new JPanel(new BorderLayout(0, 10));
+        JPanel panel = new JPanel(new BorderLayout(0, 8));
         panel.setBackground(new Color(245, 246, 251));
-        panel.setBorder(new EmptyBorder(10, 20, 20, 20));
+        panel.setBorder(new EmptyBorder(8, 16, 12, 16));
         return panel;
     }
 
     private JPanel createHeaderBar(boolean showBack) {
         JPanel bar = new JPanel(new BorderLayout());
         bar.setBackground(new Color(245, 246, 251));
-        bar.setPreferredSize(new Dimension(0, 35));
+        bar.setPreferredSize(new Dimension(0, 25));
 
         if (showBack) {
             JLabel back = new JLabel("←");
-            back.setFont(new Font("Segoe UI", Font.BOLD, 20));
+            back.setFont(new Font("Segoe UI", Font.BOLD, 18));
             back.setForeground(new Color(42, 61, 102));
             back.setCursor(new Cursor(Cursor.HAND_CURSOR));
             back.addMouseListener(new MouseAdapter() {
@@ -453,17 +456,17 @@ public class FitnessApp extends JFrame {
             bar.add(back, BorderLayout.WEST);
         }
         JLabel dots = new JLabel("•••");
-        dots.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        dots.setFont(new Font("Segoe UI", Font.BOLD, 12));
         dots.setForeground(Color.LIGHT_GRAY);
         bar.add(dots, BorderLayout.EAST);
         return bar;
     }
 
     private JPanel createFieldWrapper(String labelText, JTextField field) {
-        JPanel wrapper = new JPanel(new BorderLayout(0, 4));
+        JPanel wrapper = new JPanel(new BorderLayout(0, 2));
         wrapper.setBackground(Color.WHITE);
         JLabel lbl = new JLabel(labelText);
-        lbl.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        lbl.setFont(new Font("Segoe UI", Font.BOLD, 11));
         lbl.setForeground(new Color(110, 120, 140));
         wrapper.add(lbl, BorderLayout.NORTH);
         wrapper.add(field, BorderLayout.CENTER);
@@ -471,7 +474,7 @@ public class FitnessApp extends JFrame {
     }
 
     private JPanel createMiniFieldWrapper(String labelText, JTextField field) {
-        JPanel wrapper = new JPanel(new BorderLayout(0, 2));
+        JPanel wrapper = new JPanel(new BorderLayout(0, 1));
         wrapper.setBackground(Color.WHITE);
         JLabel lbl = new JLabel(labelText, JLabel.CENTER);
         lbl.setFont(new Font("Segoe UI", Font.BOLD, 10));
@@ -485,9 +488,9 @@ public class FitnessApp extends JFrame {
         JTextField tf = new JTextField(placeholder);
         tf.setForeground(Color.LIGHT_GRAY);
         tf.setBackground(new Color(240, 242, 248));
-        tf.setBorder(new EmptyBorder(5, 8, 5, 8));
-        tf.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        tf.setPreferredSize(new Dimension(0, 44));
+        tf.setBorder(new EmptyBorder(4, 8, 4, 8));
+        tf.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        tf.setPreferredSize(new Dimension(0, 38));
         tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (tf.getText().equals(placeholder)) { tf.setText(""); tf.setForeground(new Color(42, 61, 102)); }
@@ -511,22 +514,25 @@ public class FitnessApp extends JFrame {
             }
         };
         row.setOpaque(false);
-        row.setPreferredSize(new Dimension(0, 56));
         row.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        JPanel leftGroup = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 10));
+        
+        row.setPreferredSize(new Dimension(Integer.MAX_VALUE, 48));
+        row.setMinimumSize(new Dimension(0, 48));
+
+        JPanel leftGroup = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 8));
         leftGroup.setOpaque(false);
 
         JLabel iconLabel = new JLabel();
-        iconLabel.setPreferredSize(new Dimension(36, 36));
+        iconLabel.setPreferredSize(new Dimension(32, 32));
         try {
             ImageIcon icon = new ImageIcon(imagePath);
-            if (icon.getIconWidth() > 0) iconLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(36, 36, Image.SCALE_SMOOTH)));
+            if (icon.getIconWidth() > 0) iconLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH)));
         } catch (Exception e) { iconLabel.setText("⚪"); }
         leftGroup.add(iconLabel);
 
         JLabel label = new JLabel(name);
-        label.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        label.setFont(new Font("Segoe UI", Font.BOLD, 14));
         label.setForeground(new Color(42, 61, 102));
         leftGroup.add(label);
 
@@ -542,24 +548,24 @@ public class FitnessApp extends JFrame {
     }
 
     private JPanel createStripeWrapper(JLabel textLabel, Color bg, String imagePath) {
-        JPanel stripe = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 8)) {
+        JPanel stripe = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 6)) {
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2.setColor(bg);
-                g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 14, 14));
+                g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 12, 12));
                 g2.dispose();
             }
         };
         stripe.setOpaque(false);
-        stripe.setMaximumSize(new Dimension(Short.MAX_VALUE, 42));
+        stripe.setMaximumSize(new Dimension(Short.MAX_VALUE, 36));
 
         JLabel iconLabel = new JLabel();
-        iconLabel.setPreferredSize(new Dimension(24, 24));
+        iconLabel.setPreferredSize(new Dimension(20, 20));
         try {
             ImageIcon icon = new ImageIcon(imagePath);
-            if (icon.getIconWidth() > 0) iconLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)));
+            if (icon.getIconWidth() > 0) iconLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         } catch (Exception e) { iconLabel.setText("🔸"); }
 
         stripe.add(iconLabel);
@@ -568,15 +574,15 @@ public class FitnessApp extends JFrame {
     }
 
     private JPanel createLiveRowWrapper(JLabel textLabel, String imagePath) {
-        JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
         row.setOpaque(false);
         row.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JLabel imgLabel = new JLabel();
-        imgLabel.setPreferredSize(new Dimension(20, 20));
+        imgLabel.setPreferredSize(new Dimension(18, 18));
         try {
             ImageIcon icon = new ImageIcon(imagePath);
-            if (icon.getIconWidth() > 0) imgLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+            if (icon.getIconWidth() > 0) imgLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH)));
         } catch (Exception e) { imgLabel.setText("▫️"); }
 
         row.add(imgLabel);
@@ -590,26 +596,26 @@ public class FitnessApp extends JFrame {
         col.setBackground(Color.WHITE);
 
         JLabel iconLabel = new JLabel();
-        iconLabel.setPreferredSize(new Dimension(32, 32));
+        iconLabel.setPreferredSize(new Dimension(26, 26));
         iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         try {
             ImageIcon icon = new ImageIcon(imagePath);
-            if (icon.getIconWidth() > 0) iconLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+            if (icon.getIconWidth() > 0) iconLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(26, 26, Image.SCALE_SMOOTH)));
         } catch (Exception e) { iconLabel.setText("🔹"); }
 
         JLabel tLbl = new JLabel(title);
-        tLbl.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        tLbl.setFont(new Font("Segoe UI", Font.PLAIN, 10));
         tLbl.setForeground(Color.GRAY);
         tLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        valLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        valLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
         valLabel.setForeground(new Color(42, 61, 102));
         valLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         col.add(iconLabel);
-        col.add(Box.createVerticalStrut(4));
-        col.add(tLbl);
         col.add(Box.createVerticalStrut(2));
+        col.add(tLbl);
+        col.add(Box.createVerticalStrut(1));
         col.add(valLabel);
         return col;
     }
@@ -654,7 +660,7 @@ public class FitnessApp extends JFrame {
             this.text = text;
             this.baseColor = baseColor;
             setOpaque(false);
-            setPreferredSize(new Dimension(0, 44));
+            setPreferredSize(new Dimension(0, 42));
             setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
 
@@ -666,7 +672,7 @@ public class FitnessApp extends JFrame {
             g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 16, 16));
 
             g2.setColor(Color.WHITE);
-            g2.setFont(new Font("Segoe UI", Font.BOLD, 15));
+            g2.setFont(new Font("Segoe UI", Font.BOLD, 14));
             FontMetrics fm = g2.getFontMetrics();
             int x = (getWidth() - fm.stringWidth(text)) / 2;
             int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
