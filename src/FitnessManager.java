@@ -37,7 +37,6 @@ public class FitnessManager {
         metrics.setSteps(steps);
         metrics.setSelectedActivity(activityName);
 
-
         if (height > 0) {
             double bmiValue = weight / (height * height);
             metrics.setBmi(Math.round(bmiValue * 10.0) / 10.0);
@@ -45,7 +44,6 @@ public class FitnessManager {
             else if (bmiValue < 25.0) metrics.setBmiStatus("Normal");
             else metrics.setBmiStatus("Overweight");
         }
-
 
         String hrStatus = "Normal";
         if (heartRate < 60) {
@@ -61,7 +59,6 @@ public class FitnessManager {
         }
         metrics.setHeartRateStatus(hrStatus);
 
-
         double metIntensity;
         switch (activityName) {
             case "Resting" -> metIntensity = 1.0;
@@ -71,39 +68,74 @@ public class FitnessManager {
             default -> metIntensity = 1.0;
         }
 
-
         double baseBurn = metIntensity * weight * 0.5;
         double stepBurn = steps * 0.04;
         metrics.setCalories((int) (baseBurn + stepBurn));
     }
 
-
+    
     public String[] generatePersonalizedAdvisories() {
         String[] recs = new String[3];
 
-
+       
         if ("Underweight".equals(metrics.getBmiStatus())) {
-            recs[0] = "BMI is " + metrics.getBmi() + " (" + metrics.getBmiStatus() + "): Focus on high-protein nutrition and lean muscle gains.";
+            recs[0] = "BMI is " + metrics.getBmi() + " (" + metrics.getBmiStatus() + "): Focus on high-protein nutrition and progressive muscle gains.";
         } else if ("Overweight".equals(metrics.getBmiStatus())) {
-            recs[0] = "BMI is " + metrics.getBmi() + " (" + metrics.getBmiStatus() + "): Prioritize steady cardio sessions and balanced meals.";
+            recs[0] = "BMI is " + metrics.getBmi() + " (" + metrics.getBmiStatus() + "): Prioritize structural cardiovascular work and controlled caloric ratios.";
         } else {
-            recs[0] = "BMI is " + metrics.getBmi() + " (" + metrics.getBmiStatus() + "): Ideal weight metrics! Keep maintaining your current habits.";
+            recs[0] = "BMI is " + metrics.getBmi() + " (" + metrics.getBmiStatus() + "): Ideal weight metrics! Maintain your steady metabolic balance.";
         }
 
+        
+        String activity = metrics.getSelectedActivity();
+        String hrStatus = metrics.getHeartRateStatus();
+        int hr = metrics.getHeartRate();
 
-        if ("Low".equals(metrics.getHeartRateStatus())) {
-            recs[1] = "BPM is " + metrics.getHeartRate() + " (" + metrics.getHeartRateStatus() + "): Vitals are low. Ensure you do a proper warmup.";
-        } else if ("High".equals(metrics.getHeartRateStatus())) {
-            recs[1] = "BPM is " + metrics.getHeartRate() + " (" + metrics.getHeartRateStatus() + "): High heart strain detected. Slow down and rest.";
-        } else {
-            recs[1] = "BPM is " + metrics.getHeartRate() + " (" + metrics.getHeartRateStatus() + "): Perfect heart rate zone for this activity.";
+        switch (activity) {
+            case "Resting" -> {
+                if ("Low".equals(hrStatus)) {
+                    recs[1] = "BPM is Low (" + hr + ") while Resting: Your metabolism is deeply relaxed. Consider a warm tea or circulatory support to gently sustain robust baseline oxygen tracking.";
+                } else if ("High".equals(hrStatus)) {
+                    recs[1] = "BPM is High (" + hr + ") while Resting: This reveals latent stress or incomplete muscular recovery. Avoid stimulant supplements, stay completely still, and rest.";
+                } else {
+                    recs[1] = "BPM is Normal (" + hr + ") while Resting: Excellent homeostasis baseline. To maintain this, secure consistent sleep schedules and monitor your early morning resting pulse.";
+                }
+            }
+            case "Walking" -> {
+                if ("Low".equals(hrStatus)) {
+                    recs[1] = "BPM is Low (" + hr + ") during Walking: High cardiac efficiency. Take a natural thermogenic helper, or elevate your walking stride speed to cross safely into an active fat-burn zone.";
+                } else if ("High".equals(hrStatus)) {
+                    recs[1] = "BPM is High (" + hr + ") during Walking: Moving too fast for a steady state setup. Slow down your step cadence immediately and drink some water.";
+                } else {
+                    recs[1] = "BPM is Normal (" + hr + ") for Walking: Great active recovery pacing. To maintain this conditioning, complete a steady 20-minute rhythmic walk every single day.";
+                }
+            }
+            case "Running" -> {
+                if ("Low".equals(hrStatus)) {
+                    recs[1] = "BPM is Low (" + hr + ") during Running: Under-exertion pacing detected. If you feel overly sluggish, safely integrate pre-workout tracking to support your athletic energy output.";
+                } else if ("High".equals(hrStatus)) {
+                    recs[1] = "BPM is High (" + hr + ") during Running: Exceeding safe aerobic thresholds. Drop down to a casual recovery walk immediately to alleviate high cardiovascular stress.";
+                } else {
+                    recs[1] = "BPM is Normal (" + hr + ") for Running: Fantastic cardiorespiratory health! To maintain this high stamina level, structure your running splits with balanced high and low intervals.";
+                }
+            }
+            case "Exercise" -> {
+                if ("Low".equals(hrStatus)) {
+                    recs[1] = "BPM is Low (" + hr + ") during Exercise: Your metabolic engine is lagging. Perform dynamic warmups and try pre-workout amplifiers to safely prime your muscles for load weight.";
+                } else if ("High".equals(hrStatus)) {
+                    recs[1] = "BPM is High (" + hr + ") during Exercise: Central nervous system overload. Extend your breathing rest intervals between training sets and hydrate heavily.";
+                } else {
+                    recs[1] = "BPM is Normal (" + hr + ") for Exercise: Optimum anabolic state. To maintain this training index, ensure proper electrolyte intake before jumping directly into physical lifting blocks.";
+                }
+            }
+            default -> recs[1] = "Vitals are tracking inside stable automated zones. Continue monitoring metrics.";
         }
 
-        // Recommendation 3: Steps Target Goal
+       
         if (metrics.getSteps() >= 7000) {
-            recs[2] = "Great job logging " + String.format("%,d", metrics.getSteps()) + " steps! Your active daily endurance is outstanding.";
+            recs[2] = "Great job logging " + String.format("%,d", metrics.getSteps()) + " steps! Your active daily endurance footprint is outstanding.";
         } else {
-            recs[2] = "You logged " + String.format("%,d", metrics.getSteps()) + " steps. Try a quick walk to reach a target goal of 7,000 steps.";
+            recs[2] = "You logged " + String.format("%,d", metrics.getSteps()) + " steps. Try a quick walk interval block to clear your 7,000 baseline milestone.";
         }
 
         return recs;
