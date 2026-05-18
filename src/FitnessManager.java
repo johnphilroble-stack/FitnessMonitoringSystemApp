@@ -11,7 +11,7 @@ public class FitnessManager {
         try { metrics.setWeight(Double.parseDouble(weightStr.trim())); } catch(Exception e) { metrics.setWeight(60.0); }
         try {
             double rawHeight = Double.parseDouble(heightStr.trim());
-            if (rawHeight > 3.0) rawHeight /= 100.0; // Auto-convert cm to meters safely
+            if (rawHeight > 3.0) rawHeight /= 100.0; 
             metrics.setHeight(rawHeight);
         } catch(Exception e) { metrics.setHeight(1.7); }
         calculateBMI();
